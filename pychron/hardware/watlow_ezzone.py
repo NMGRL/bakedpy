@@ -300,6 +300,9 @@ class WatlowEZZone(CoreDevice):
 
         mo = self.max_output_scale
         mi = self.min_output_scale
+        if mo==mi:
+            mo,mi=oh,ol
+
         # print oh, ol, mo, mi
         self._max_output = (oh - ol) / (mo - mi)*100
 
