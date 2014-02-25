@@ -508,7 +508,7 @@ class BakeoutManager(Manager):
         v = self.update_interval
         for ci in self._get_controllers():
             if ci._timer:
-                ci._timer.set_interval(v)
+                ci._timer.set_interval(v*1000)
             ci.update_interval = v
 
         self.graph.set_scan_delay(v)

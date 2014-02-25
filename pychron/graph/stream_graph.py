@@ -196,7 +196,7 @@ class StreamGraph(Graph):
         #        lim = MAX_LIMIT
         #         pad = 100
         #        print lim, nx, ny
-        lim = -dl * sd - 1000
+        lim = int(-dl * sd - 1000)
         new_xd = hstack((xd[lim:], [nx]))
         new_yd = hstack((yd[lim:], [ny]))
         #        print new_xd
