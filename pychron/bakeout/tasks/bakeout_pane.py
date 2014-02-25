@@ -16,7 +16,7 @@
 
 #============= enthought library imports =======================
 from traitsui.api import View, Item, UItem, HGroup, VGroup, \
-     EnumEditor, ButtonEditor
+    EnumEditor, ButtonEditor
 from pyface.tasks.traits_task_pane import TraitsTaskPane
 from pyface.tasks.traits_dock_pane import TraitsDockPane
 #============= standard library imports ========================
@@ -24,13 +24,19 @@ from pyface.tasks.traits_dock_pane import TraitsDockPane
 
 class GraphPane(TraitsTaskPane):
     id = 'bakeout.graph'
+
     def traits_view(self):
         v = View(UItem('graph', style='custom'))
         return v
 
+
 class ControllerPane(TraitsDockPane):
     id = 'bakeout.controller'
     name = 'Channels'
+    closable = False
+    movable = False
+    floatable = False
+
     def traits_view(self):
         controller_grp = HGroup()
         for tr in self.model._get_controller_names():
@@ -38,40 +44,45 @@ class ControllerPane(TraitsDockPane):
         v = View(controller_grp)
         return v
 
+
 class ControlsPane(TraitsDockPane):
     id = 'bakeout.controls'
     name = 'Controls'
+    closable = False
+    movable = False
+    floatable = False
+
     def traits_view(self):
         control_grp = VGroup(
-                            HGroup(Item('execute',
-                                        editor=ButtonEditor(label_value='execute_label'), show_label=False,
-                                        enabled_when='execute_ok'),
-                                   Item('training_run', label='Training Run')
-                                   ),
-                             VGroup(
-                                    HGroup(Item('configuration',
-                                         editor=EnumEditor(name='configurations'),
-                                         show_label=False),
-                                           Item('save',
-                                         show_label=False)
-                                    ),
-                                    show_border=True,
-                                    label='Configuration'
-                                    ),
-                             VGroup('include_pressure',
-                                    'include_heat',
-                                    'include_temp',
-                                    label='Graphs',
-                                    show_border=True,
-                                    enabled_when='not active'),
-                             VGroup(
-                                    Item('update_interval',
-                                         label='Sample Period (s)'),
-                                    Item('scan_window', label='Data Window (mins)'),
-                                    label='Scan',
-                                    show_border=True,
-                                    )
-                             )
+            HGroup(Item('execute',
+                        editor=ButtonEditor(label_value='execute_label'), show_label=False,
+                        enabled_when='execute_ok'),
+                   Item('training_run', label='Training Run')
+            ),
+            VGroup(
+                HGroup(Item('configuration',
+                            editor=EnumEditor(name='configurations'),
+                            show_label=False),
+                       Item('save',
+                            show_label=False)
+                ),
+                show_border=True,
+                label='Configuration'
+            ),
+            VGroup('include_pressure',
+                   'include_heat',
+                   'include_temp',
+                   label='Graphs',
+                   show_border=True,
+                   enabled_when='not active'),
+            VGroup(
+                Item('update_interval',
+                     label='Sample Period (s)'),
+                Item('scan_window', label='Data Window (mins)'),
+                label='Scan',
+                show_border=True,
+            )
+        )
         v = View(control_grp)
         return v
 
