@@ -154,6 +154,7 @@ class BakeoutController(WatlowEZZone):
         self.set_attribute(config, '_check_temp_threshold', 'Monitor', 'threshold', cast='float', default=40)
         self.set_attribute(config, '_check_start_minutes', 'Monitor', 'start_time', cast='float', default=5)
 
+        self.set_attribute(config, 'use_pid_bin', 'PID', 'use_pid_bin', cast='boolean', default=False)
         return True
 
 

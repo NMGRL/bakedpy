@@ -68,9 +68,12 @@ class CommunicationScheduler(Loggable):
 #            r = self._buffer.get(timeout=0.5)
 #        except Empty:
 #            r = None
-
+        #         self.debug('acquire lock {}'.format(func.func_name))
         with self._lock:
+            # self.debug('lock acquired {}'.format(func.func_name))
             r = func(*args, **kwargs)
+
+        # self.debug('lock released {}'.format(func.func_name))
 
         return r
 

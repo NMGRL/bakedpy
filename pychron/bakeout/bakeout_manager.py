@@ -307,7 +307,7 @@ class BakeoutManager(Manager):
             self.graph.new_series(plotid=self.plotids[1])
 
     def _do_graph(self, data):
-#         self.debug('do graph {}'.format(len(data)))
+
         g = self.graph
         temp_id = self.plotids[0]
         heat_id = self.plotids[1]
@@ -559,8 +559,9 @@ class BakeoutManager(Manager):
                 self.data_manager.close_file()
 
     @on_trait_change('include_+')
-    def _toggle_graphs(self):
-        self.graph = self._graph_factory()
+    def _toggle_graphs(self, name, new):
+        self.debug('include changed {} {}'.format(name, new))
+        # self.graph = self._graph_factory()
         self.reset_general_scan()
 
     def _graph_thread(self):
@@ -568,7 +569,7 @@ class BakeoutManager(Manager):
         n = len(self._get_controller_names())
         while 1:
             while dq.qsize() < n:
-                time.sleep(0.1)
+                time.sleep(0.05)
 
             data = [dq.get() for _ in range(n)]
             invoke_in_main_thread(self._do_graph,data)

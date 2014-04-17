@@ -57,7 +57,9 @@ def build_sys_path(ver, root):
     merc = os.path.join(os.path.expanduser('~'),
                         'Programming',
                         'git')
-    src = os.path.join(merc, 'pychron{}'.format(ver))
+
+    src = os.path.join(merc, 'bakedpy')
+    # src = os.path.join(merc, 'pychron{}'.format(ver))
 
     sys.path.insert(0, src)
 
