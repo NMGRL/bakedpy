@@ -35,6 +35,8 @@ class BakeoutAdapter(PathDatabaseAdapter):
 #==============================================================================
 #    getters
 #==============================================================================
+    def get_bakeout(self, rid):
+        return self._retrieve_item(BakeoutTable, rid, key='id')
 
     def get_bakeouts(self, **kw):
         return self._get_items(BakeoutTable, globals(), **kw)

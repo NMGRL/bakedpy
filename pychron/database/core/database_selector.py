@@ -15,6 +15,7 @@
 #===============================================================================
 
 #============= enthought library imports =======================
+from pyface.timer.do_later import do_later
 from traits.api import Button, List, Any, Dict, Bool, Int, Enum, Event, \
     on_trait_change, Str, Instance, Property
 from traitsui.api import View, Item, \
@@ -31,14 +32,13 @@ from pychron.core.ui.tabular_editor import myTabularEditor
 # from pychron.database.core.base_results_adapter import BaseResultsAdapter
 from pychron.core.ui.custom_label_editor import CustomLabel
 from traitsui.tabular_adapter import TabularAdapter
-from pychron.core.ui.gui import invoke_in_main_thread
 from pychron.column_sorter_mixin import ColumnSorterMixin
 
 
 class BaseTabularAdapter(TabularAdapter):
     columns = [('ID', 'record_id'),
-               ('Timestamp', 'timestamp')
-    ]
+               ('Timestamp', 'timestamp')]
+
 
 # class ColumnSorterMixin(HasTraits):
 #     _sort_field = None
@@ -127,8 +127,8 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
         self._load_records(dbs)
         #        self._sort_columns(self.records)
         if self.scroll_to_bottom:
-            self.scroll_to_row = len(self.records) - 1
-            #         self.debug('scb= {}, scroll to row={}'.format(self.scroll_to_bottom, self.scroll_to_row))
+            idx = len(self.records) - 1
+            do_later(self.trait_set, scroll_to_row=idx, selected=self.records[-1:])
 
     def table_add_query(self):
         self._add_query(add=False)
@@ -158,8 +158,6 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
         with self.db.session_ctx():
             dbs, _stmt = self._get_selector_records(limit=n)
             self.load_records(dbs, load=False)
-
-            #    def execute_query(self, filter_str=None):
 
     def execute_query(self, queries=None, load=True, use_filters=True):
         with self.db.session_ctx():
@@ -231,8 +229,7 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
 
         dbs, query_str = self._get_selector_records(limit=limit,
                                                     queries=queries,
-                                                    use_filters=use_filters,
-        )
+                                                    use_filters=use_filters)
 
         if not self.verbose:
             query_str = str(query_str)
@@ -252,12 +249,12 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
             rs = [ri for ri in rs if ri]
             self.records.extend(rs)
 
-    def _record_closed(self, obj, name, old, new):
-        sid = obj.record_id
-        if sid in self.opened_windows:
-            self.opened_windows.pop(sid)
-
-        obj.on_trait_change(self._record_closed, 'close_event', remove=True)
+    # def _record_closed(self, obj, name, old, new):
+    #     sid = obj.record_id
+    #     if sid in self.opened_windows:
+    #         self.opened_windows.pop(sid)
+    #
+    #     obj.on_trait_change(self._record_closed, 'close_event', remove=True)
 
     #        obj.on_trait_change(self._changed, '_changed', remove=True)
 
@@ -286,42 +283,53 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
         self.debug('opened')
 
     def _open_individual(self, si):
-        si = self._record_factory(si)
+        obj = self._make_record(si)
+        if obj:
+            obj.window_x = self.wx
+            obj.window_y = self.wy
+            info = obj.edit_traits()
+            self._open_window(si.record_id, info)
 
-        if isinstance(si, str):
-            si = self._record_factory(si)
-        else:
-            si.selector = self
+    def _make_record(self, record_id):
+        pass
 
-        if not si.initialize():
-            return
-
-        sid = si.record_id
-        try:
-            si.load_graph()
-            si.window_x = self.wx
-            si.window_y = self.wy
-
-            def do(si, sid):
-            #                app = self.db.application
-            #                from pyface.tasks.task_window_layout import TaskWindowLayout
-            #                win = app.create_window(TaskWindowLayout('pychron.recall'))
-            #                win.active_task.record = si
-            #                print win.active_task.record
-            #                win.open()
-            #                self.debug('{}'.format(si))
-                info = si.edit_traits()
-                self._open_window(sid, info)
-
-            self.debug('do later open')
-            invoke_in_main_thread(do, si, sid)
-
-        except Exception, e:
-            import traceback
-
-            traceback.print_exc()
-            self.warning(e)
-
+    # def _open_individual(self, si):
+    #     si = self._record_factory(si)
+    #
+    #     if isinstance(si, str):
+    #         si = self._record_factory(si)
+    #     else:
+    #         si.selector = self
+    #
+    #     if not si.initialize():
+    #         return
+    #
+    #     sid = si.record_id
+    #     try:
+    #         si.load_graph()
+    #         si.window_x = self.wx
+    #         si.window_y = self.wy
+    #
+    #         def do(si, sid):
+    #         #                app = self.db.application
+    #         #                from pyface.tasks.task_window_layout import TaskWindowLayout
+    #         #                win = app.create_window(TaskWindowLayout('pychron.recall'))
+    #         #                win.active_task.record = si
+    #         #                print win.active_task.record
+    #         #                win.open()
+    #         #                self.debug('{}'.format(si))
+    #             info = si.edit_traits()
+    #             self._open_window(sid, info)
+    #
+    #         self.debug('do later open')
+    #         invoke_in_main_thread(do, si, sid)
+    #
+    #     except Exception, e:
+    #         import traceback
+    #
+    #         traceback.print_exc()
+    #         self.warning(e)
+    #
     def _open_window(self, wid, ui):
         self.opened_windows[wid] = ui
         self._update_windowxy()
@@ -411,15 +419,14 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
     def _query_factory(self, removable=True, **kw):
         q = self.query_klass(selector=self,
                              removable=removable,
-                             date_str=self.date_str,
-        )
+                             date_str=self.date_str)
 
         q.trait_set(trait_change_notify=False, **kw)
         return q
 
-    def _record_factory(self, di):
-        di.on_trait_change(self._record_closed, 'close_event')
-        return di
+    # def _record_factory(self, di):
+    #     di.on_trait_change(self._record_closed, 'close_event')
+    #     return di
 
     #===============================================================================
     # views
@@ -444,16 +451,13 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
     def _view_factory(self):
         editor = myTabularEditor(adapter=self.tabular_adapter(),
                                  dclicked='object.dclicked',
-                                 selected='object.selected',
+                                 selected='selected',
                                  selected_row='object.selected_row',
                                  update='update',
                                  scroll_to_row='scroll_to_row',
-                                 #                               auto_update=True,
                                  column_clicked='object.column_clicked',
                                  editable=False,
-                                 multi_select=not self.style == 'single',
-
-        )
+                                 multi_select=not self.style == 'single')
 
         button_grp = self._get_button_grp()
         v = View(
@@ -465,21 +469,17 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
                          editor=editor,
                          show_label=False,
                          height=0.75,
-                         width=600,
-                    ),
+                         width=600),
                     Item('queries', show_label=False,
                          style='custom',
                          height=0.25,
                          editor=ListEditor(mutable=False,
                                            style='custom',
                                            editor=InstanceEditor()),
-                         defined_when='style in ["normal","panel"]')
-                ),
-                button_grp,
-            ),
+                         defined_when='style in ["normal","panel"]')),
+                button_grp, ),
             resizable=True,
-            handler=SelectorHandler
-        )
+            handler=SelectorHandler)
 
         if self.style == 'single':
             v.buttons = ['OK', 'Cancel']

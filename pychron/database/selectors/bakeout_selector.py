@@ -20,32 +20,28 @@
 from pychron.database.orms.bakeout_orm import BakeoutTable
 from pychron.database.core.database_selector import DatabaseSelector
 from pychron.database.core.query import BakeoutQuery
-from pychron.database.records.bakeout_record import BakeoutRecord
+from pychron.database.records.bakeout_record import BakeoutRecordView, BakeoutRecord
 
-#
-
-# class BakeoutTabularAdapter(TabularAdapter):
-#    columns = [('ID', 'record_id'),
-#               ('Timestamp', 'timestamp')
-#               ]
 
 class BakeoutDBSelector(DatabaseSelector):
-
     query_table = BakeoutTable
-    record_klass = BakeoutRecord
-    record_view_klass = BakeoutRecord
+    record_view_klass = BakeoutRecordView
     query_klass = BakeoutQuery
-#    tabular_adapter = BakeoutTabularAdapter
-    lookup = {'Run Date':([], BakeoutTable.timestamp), }
-
+    lookup = {'Run Date': ([], BakeoutTable.timestamp), }
     dclick_recall_enabled = True
-#    def _record_factory(self, idn):
-#        return idn
+
+    def _make_record(self, record_view):
+        db = self.db
+        with db.session_ctx():
+            dbrecord = db.get_bakeout(record_view.record_id)
+            r = BakeoutRecord(dbrecord)
+
+        return r
 
     def _get_selector_records(self, queries=None, limit=None, **kw):
-        sess = self.db.get_session()
-        q = sess.query(self.query_table)
-        return self._get_records(q, queries, limit)
+        with self.db.session_ctx() as sess:
+            q = sess.query(self.query_table)
+            return self._get_records(q, queries, limit)
 
 #============= EOF =============================================
 

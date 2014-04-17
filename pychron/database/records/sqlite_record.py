@@ -15,19 +15,16 @@
 #===============================================================================
 
 #============= enthought library imports =======================
-from traits.api import Property, cached_property
-from pychron.database.records.database_record import DatabaseRecord
 #============= standard library imports ========================
 import os
 #============= local library imports  ==========================
+from pychron.database.records.database_record import DatabaseRecord
+
 
 class SQLiteRecord(DatabaseRecord):
-    path = Property
+    def _make_path(self, dbrecord):
+        root = dbrecord.path.root
+        name = dbrecord.path.filename
+        return os.path.join(root, name)
 
-    @cached_property
-    def _get_path(self):
-        if self.dbrecord.path:
-            root = self.dbrecord.path.root
-            name = self.dbrecord.path.filename
-            return os.path.join(root, name)
-#============= EOF =============================================
+# #============= EOF =============================================
