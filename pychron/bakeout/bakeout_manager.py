@@ -125,10 +125,8 @@ class BakeoutManager(Manager):
         db = self.database
         if db.connect():
             sel = db.selector
-            sel.load_recent()
-            if sel.records:
-                rec = sel.records[-1]
-                sel.open_record(rec)
+            sel.open_latest_record()
+
 
     def refresh_scripts(self):
         for c in self._get_controllers():

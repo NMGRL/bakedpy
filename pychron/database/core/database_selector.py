@@ -176,6 +176,11 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
         qe = self.query_factory(criterion=end, parameter=self.date_str, comparator='<=')
         return self._execute_query([qs, qe], **kw)
 
+    def open_latest_record(self):
+        self.load_recent()
+        if self.records:
+            self._open_selected(records=self.records[-1:])
+
     #===============================================================================
     # private
     #===============================================================================
