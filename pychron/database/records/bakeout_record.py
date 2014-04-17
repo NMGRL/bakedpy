@@ -76,7 +76,7 @@ class BakeoutRecord(SQLiteRecord):
                           # readonly('rundate', label='Date'),
                           readonly('timestamp', label='Run Time'),
                           readonly('path', label='Path'),
-                          # UItem('summary', style='custom'),
+                          UItem('summary', style='custom'),
                           label='Info')
         graph_grp = UItem('graph', style='custom')
 
