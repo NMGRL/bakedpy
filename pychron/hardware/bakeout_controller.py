@@ -29,16 +29,6 @@ from watlow_ezzone import WatlowEZZone
 from pychron.pychron_constants import NULL_STR
 from pychron.pyscripts.bakeout_pyscript import BakeoutPyScript
 from pychron.core.ui.led_editor import LEDEditor, ButtonLED
-# from pychron.core.ui.led_editor import ButtonLED, LEDEditor
-
-# class BakeoutMonitor():
-#    pass
-# class WarningMessge(HasTraits):
-#    message = Str
-#    def traits_view(self):
-#        v=View(HGroup(Item('image'),
-#
-#                      )
 
 
 BLANK_SCRIPT = NULL_STR
@@ -70,11 +60,8 @@ class BakeoutController(WatlowEZZone):
 
     scripts = List()
     script = Str(BLANK_SCRIPT)
-    #    led = Instance(LED, ())
-    #     led = Instance(ButtonLED, ())
     led = Any
 
-    #    alive = Bool(False)
     active = Bool(False)
     cnt = 0
     ramp_scale = None
@@ -87,9 +74,6 @@ class BakeoutController(WatlowEZZone):
 
     record_process = Bool(False)
 
-    # max_output = Property(Float(enter_set=True, auto_set=False),
-    #                       depends_on='_max_output')
-    # _max_output = Float(100)
     _duration_timeout = False
 
     _timer = None
@@ -112,41 +96,19 @@ class BakeoutController(WatlowEZZone):
     _check_start_minutes = 5
     default_output = 2
 
-    #    (depends_on='_ok_to_run')
-    #    _ok_to_run = Bool(False)
-
-
-
     def initialization_hook(self):
-        '''
+        """
             suppress the normal initialization querys
             they are not necessary for the bakeout manager currently
-        '''
-        # read the current max output setting
-        # p = self.read_high_power_scale()
-        # if p:
-        #     self._max_output = p
-
-            #    def isAlive(self):
-            #        return self.alive
+        """
+        pass
 
     def isActive(self):
         return self.active
 
-    #    def kill(self):
-    #        self.led.state = 'red'
-    # #        if self.isAlive() and self.isActive():
-    #        if self.isActive():
-    #            self.info('killing')
-    #            if self._active_script is not None:
-    #                self._active_script._alive = False
-    #
-    #            if abs(self.setpoint) > 0.001:
-    #                self.set_closed_loop_setpoint(0)
-
     def load_additional_args(self, config):
-        '''
-        '''
+        """
+        """
         self.load_scripts()
 
         self.set_attribute(config, '_check_temp_enabled', 'Monitor', 'enabled', cast='boolean', default=True)
@@ -162,10 +124,6 @@ class BakeoutController(WatlowEZZone):
         sd = os.path.join(paths.scripts_dir, 'bakeout')
         if os.path.isdir(sd):
             files = os.listdir(sd)
-            #            s = [f for f in files
-            #                        if not os.path.basename(f).startswith('.') and
-            #                             os.path.splitext(f)[1] in ['.py', '.bo']]
-            #            print s
             s = [NULL_STR] + [f for f in files if not f.startswith('.') and
                                                   os.path.isfile(os.path.join(sd, f)) and
                                                   os.path.splitext(f)[1] in ['.py', '.bo']]
@@ -195,8 +153,8 @@ Add {}'.format(sd)):
             self.led.state = 'red'
 
     def run(self):
-        '''
-        '''
+        """
+        """
         self.cnt = 0
         self.start_time = time.time()
         self.active = True
@@ -246,8 +204,8 @@ Add {}'.format(sd)):
         self._timer = Timer(self.update_interval * 1000., self._update_)
 
     def ramp_to_setpoint(self, ramp, setpoint, scale):
-        '''
-        '''
+        """
+        """
         if scale is not None and scale != self.ramp_scale:
             self.ramp_scale = scale
             self.set_ramp_scale(scale)
@@ -258,8 +216,8 @@ Add {}'.format(sd)):
         self.setpoint = setpoint
 
     def set_ramp_scale(self, value, **kw):
-        '''
-        '''
+        """
+        """
         scalemap = {'h': 39,
                     'm': 57}
 
@@ -270,8 +228,8 @@ Add {}'.format(sd)):
             self.write(register, value, nregisters=2, **kw)
 
     def set_ramp_action(self, value, **kw):
-        '''
-        '''
+        """
+        """
         rampmap = {'off': 62,
                    'startup': 88,
                    'setpoint': 1647,
@@ -284,8 +242,8 @@ Add {}'.format(sd)):
             self.write(register, value, nregisters=2, **kw)
 
     def set_ramp_rate(self, value, **kw):
-        '''
-        '''
+        """
+        """
         self.info('setting ramp rate = {:0.3f}'.format(value))
         register = 2192
         self.write(register, value, nregisters=2, **kw)
@@ -325,8 +283,8 @@ Add {}'.format(sd)):
         return t
 
     def _update_(self):
-        '''
-        '''
+        """
+        """
         if self.isActive():
             self.cnt += self.update_interval
             nsecs = 15
@@ -439,13 +397,12 @@ Add {}'.format(sd)):
 
     #============= views ===================================
     def traits_view(self):
-        '''
-        '''
+        """
+        """
         state_item = Item('state_button',
                           editor=ButtonEditor(label_value='state_label'),
                           show_label=False,
-                          enabled_when='state_enabled'
-        )
+                          enabled_when='state_enabled')
         show_label = False
         if self.name.endswith('1'):
             show_label = True
@@ -455,43 +412,35 @@ Add {}'.format(sd)):
                     Label(self.name[-1]),
                     Item('led', editor=LEDEditor(),
                          show_label=False, style='custom'),
-                    state_item,
-                ),
-            )
+                    state_item))
             process_grp = HGroup(
                 Spring(width=35, springy=False),
                 Label('Temp. (C)'),
                 spring,
                 Item('process_value', show_label=False,
                      style='readonly', format_str='%0.1f'),
-                spring,
-            )
+                spring)
         else:
             header_grp = HGroup(
                 HGroup(
                     Label(self.name[-1]),
                     Item('led', editor=LEDEditor(),
                          show_label=False, style='custom'),
-                    state_item,
-                    #                                Item('color', show_label=False, style='readonly')
-                ),
-            )
+                    state_item,))
             process_grp = HGroup(
                 spring,
                 Item('process_value', label='Temp (C)',
                      show_label=False,
                      style='readonly', format_str='%0.1f'),
-                spring,
-            )
+                spring)
         v = View(
             VGroup(
                 header_grp,
                 VGroup(
                     Item('script', show_label=False,
                          editor=EnumEditor(name='scripts'),
-                         width=-200,
-                         enabled_when='not active'
-                    ),
+                         width=-175,
+                         enabled_when='not active'),
                     Item('duration', label='Duration (hrs)',
                          show_label=show_label,
                          enabled_when='script=="---"',
@@ -504,10 +453,16 @@ Add {}'.format(sd)):
                          format_str='%0.2f',
                          show_label=show_label,
                          enabled_when='not active'),
-                    process_grp
-                ),
-            )
-        )
+                    process_grp)))
         return v
-
-        #============= EOF ====================================
+#============= EOF ====================================
+#    def kill(self):
+#        self.led.state = 'red'
+# #        if self.isAlive() and self.isActive():
+#        if self.isActive():
+#            self.info('killing')
+#            if self._active_script is not None:
+#                self._active_script._alive = False
+#
+#            if abs(self.setpoint) > 0.001:
+#                self.set_closed_loop_setpoint(0)
