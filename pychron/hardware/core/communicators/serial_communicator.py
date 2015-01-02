@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
 
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 
-#=============standard library imports ========================
+# =============standard library imports ========================
 import time
 import glob
 import os
@@ -28,7 +28,9 @@ import serial
 
 
 
-#=============local library imports  ==========================
+
+
+# =============local library imports  ==========================
 from communicator import Communicator
 from pychron.globals import globalv
 
@@ -245,11 +247,11 @@ class SerialCommunicator(Communicator):
                 self.warning('Port not set')
                 return False
 
-        #=======================================================================
+        # =======================================================================
         # #on windows device handles probably handled differently
         if sys.platform == 'darwin':
             port = '/dev/tty.{}'.format(port)
-            #=======================================================================
+            # =======================================================================
 
         args['port'] = port
 
@@ -678,4 +680,4 @@ if __name__ == '__main__':
         time.sleep(1)
 #    s.tell('ddd', verbose=False)
 #    print s.ask('ddd', verbose=False)
-#===================== EOF ==========================================
+# ===================== EOF ==========================================

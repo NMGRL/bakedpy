@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +12,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Any
 from traitsui.handler import Controller
+
 from pychron.core.ui.gui import invoke_in_main_thread
 
-#============= standard library imports ========================
-#============= local library imports  ==========================
+
+
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 
 class ApplicationController(Controller):
     application = Any
@@ -37,4 +40,4 @@ class ApplicationController(Controller):
             self.add_window(ui)
 
         invoke_in_main_thread(_open_)
-#============= EOF =============================================
+# ============= EOF =============================================

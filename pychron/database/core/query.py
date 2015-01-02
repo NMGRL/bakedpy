@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from datetime import datetime, timedelta
 
 from traits.api import HasTraits, String, Property, Str, List, Button, Any, \
@@ -23,8 +23,8 @@ from traitsui.api import View, Item, EnumEditor, HGroup, CheckListEditor, \
     VGroup
 from sqlalchemy.sql.expression import and_
 
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 class NItem(Item):
     pass
     padding = -15
@@ -173,9 +173,9 @@ class Query(HasTraits):
         return query
 
     #
-    #===============================================================================
+    # ===============================================================================
     # private
-    #===============================================================================
+    # ===============================================================================
     #    def _between(self, p, l, g):
     #        return '{}<="{}" AND {}>="{}"'.format(p, l, p, g)
 
@@ -210,9 +210,9 @@ class Query(HasTraits):
 
         return params
 
-    #===============================================================================
+    # ===============================================================================
     # handlers
-    #===============================================================================
+    # ===============================================================================
     def _add_fired(self):
         self.selector.add_query(self, self.parameter, self.criterion)
 
@@ -233,9 +233,9 @@ class Query(HasTraits):
         self.parent_criterions.append(new)
         self.criteria_dirty = True
 
-    #===============================================================================
+    # ===============================================================================
     # property get/set
-    #===============================================================================
+    # ===============================================================================
     @cached_property
     def _get_criteria(self):
         cs = []
@@ -281,9 +281,9 @@ class Query(HasTraits):
                     tfs.append(fi == ci)
             return tfs
 
-            #===============================================================================
+            # ===============================================================================
             # views
-            #===============================================================================
+            # ===============================================================================
 
     def traits_view(self):
 
@@ -366,7 +366,7 @@ class BakeoutQuery(Query):
                   'Controller'
     ]
 
-#============= EOF =============================================
+# ============= EOF =============================================
 #        elif 'runtime' in param:
 #    def time_query(self):
 #        args = criteria.split(':')

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +12,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
 
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Any
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from tables import openFile, Filters
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from data_manager import DataManager
 from table_descriptions import table_description_factory
 import os
@@ -353,7 +353,7 @@ class H5DataManager(DataManager):
 if __name__ == '__main__':
     d = H5DataManager()
     print d
-#============= EOF ====================================
+# ============= EOF ====================================
 #    def add_note(self, note = None):
 #        df = self.data_frames[len(self.data_frames) - 1]
 #        self._available_tables = self._get_tables(df)

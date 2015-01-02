@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 from pychron.core.ui import set_toolkit
 set_toolkit('qt4')
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import List, Any, Event, Callable
 from chaco.tools.broadcaster import BroadcasterTool
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from numpy import linspace, random
 import weakref
 
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.graph.graph import Graph
 from pychron.graph.tools.rect_selection_tool import RectSelectionTool, \
     RectSelectionOverlay
@@ -69,9 +69,9 @@ class RegressionGraph(Graph, RegressionContextMenuMixin):
     use_point_inspector = True
     convert_index_func = Callable
 
-    #===============================================================================
+    # ===============================================================================
     # context menu handlers
-    #===============================================================================
+    # ===============================================================================
     def cm_linear(self):
         self.set_fit('linear')
         self._update_graph()
@@ -92,9 +92,9 @@ class RegressionGraph(Graph, RegressionContextMenuMixin):
         self.set_fit('average_sem')
         self._update_graph()
 
-    #===============================================================================
+    # ===============================================================================
     #
-    #===============================================================================
+    # ===============================================================================
     def set_filter_outliers(self, fi, plotid=0, series=0):
         plot = self.plots[plotid]
         scatter = plot.plots['data{}'.format(series)][0]
@@ -495,7 +495,7 @@ if __name__ == '__main__':
                   filter_outliers_dict=fod)
 
     rg.configure_traits()
-#============= EOF =============================================
+# ============= EOF =============================================
 # @classmethod
 #     def _apply_block_filter(cls, xs, ys):
 #         '''

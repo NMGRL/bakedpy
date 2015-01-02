@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Any
 from pyface.tasks.task_layout import TaskLayout, PaneItem
 from pyface.tasks.action.schema import SMenu, SMenuBar
 from pyface.tasks.action.task_action import TaskAction
 
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.envisage.tasks.base_task import BaseTask
 from pychron.bakeout.tasks.bakeout_pane import  GraphPane, \
     ControllerPane, ControlsPane
@@ -77,4 +77,4 @@ class BakeoutTask(BaseTask):
                  ]
 
         return panes
-#============= EOF =============================================
+# ============= EOF =============================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
 
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 from traits.api import Any, Bool, Event, Str
 from traitsui.qt4.editor import Editor
 from traitsui.basic_editor_factory import BasicEditorFactory
@@ -27,10 +27,12 @@ from traitsui.ui_traits import convert_bitmap as traitsui_convert_bitmap
 from pychron.core.ui.gui import invoke_in_main_thread
 
 
-#=============standard library imports ========================
+
+
+# =============standard library imports ========================
 
 # import math
-#=============local library imports  ==========================
+# =============local library imports  ==========================
 # from ctypes_opencv import  cvCreateImage, CvSize, cvAddS, CvScalar, \
 # CvRect, cvSetImageROI, cvResize, cvResetImageROI
 # from ctypes_opencv.cxcore import cvZero

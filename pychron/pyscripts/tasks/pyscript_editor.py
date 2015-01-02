@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 import os
 import time
 
@@ -22,9 +22,11 @@ from traits.api import HasTraits, Property, Bool, Event, \
     Unicode, List, String, Int, on_trait_change, Instance
 from pyface.tasks.api import Editor
 
+
+
 # from pyface.ui.qt4.python_editor import PythonEditorEventFilter
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.pyscripts.tasks.widgets import myAdvancedCodeWidget
 
 SCRIPT_PKGS = dict(Bakeout='pychron.pyscripts.bakeout_pyscript',
@@ -200,9 +202,9 @@ class PyScriptEditor(Editor):
     def _get_name(self):
         return os.path.basename(self.path) or 'Untitled'
 
-    #===============================================================================
+    # ===============================================================================
     # persistence
-    #===============================================================================
+    # ===============================================================================
     def load(self, path=None):
         if path is None:
             path = self.path
@@ -256,4 +258,4 @@ class BakeoutEditor(PyScriptEditor):
     # def _editor_default(self):
     #     return ParameterEditor(editor=self)
 
-#============= EOF =============================================
+# ============= EOF =============================================

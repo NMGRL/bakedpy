@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= enthought library imports =======================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 PLUSMINUS = u'\u00b1'
 try:
     PLUSMINUS_ERR = u'{}Err.'.format(PLUSMINUS)
@@ -107,4 +107,4 @@ QTEGRA_INTEGRATION_TIMES = [0.065536, 0.131072, 0.262144, 0.524288,
 # ('NM-220', ['L', 'M', 'N', 'O']),
 # ('NM-222', ['A', 'B', 'C', 'D']),
 # ('NM-256', ['E', 'F'])]
-#============= EOF =============================================
+# ============= EOF =============================================

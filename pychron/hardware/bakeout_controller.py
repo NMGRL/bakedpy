@@ -1,31 +1,31 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import List, Event, Float, Str, Bool, Property, \
     Any
 from traitsui.api import View, Item, spring, HGroup, Label, VGroup, Spring, \
     ButtonEditor, EnumEditor
-#============= standard library imports ========================
+# ============= standard library imports ========================
 import time
 import os
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
+from watlow_ezzone import WatlowEZZone
 from pychron.core.helpers.timer import Timer
 from pychron.paths import paths
-from watlow_ezzone import WatlowEZZone
 from pychron.pychron_constants import NULL_STR
 from pychron.pyscripts.bakeout_pyscript import BakeoutPyScript
 from pychron.core.ui.led_editor import LEDEditor, ButtonLED
@@ -96,6 +96,8 @@ class BakeoutController(WatlowEZZone):
     _check_start_minutes = 5
     default_output = 2
 
+    _start_time = 0
+
     def initialization_hook(self):
         """
             suppress the normal initialization querys
@@ -119,34 +121,22 @@ class BakeoutController(WatlowEZZone):
         self.set_attribute(config, 'use_pid_bin', 'PID', 'use_pid_bin', cast='boolean', default=False)
         return True
 
-
     def load_scripts(self):
         sd = os.path.join(paths.scripts_dir, 'bakeout')
         if os.path.isdir(sd):
             files = os.listdir(sd)
             s = [NULL_STR] + [f for f in files if not f.startswith('.') and
-                                                  os.path.isfile(os.path.join(sd, f)) and
-                                                  os.path.splitext(f)[1] in ['.py', '.bo']]
+                              os.path.isfile(os.path.join(sd, f)) and
+                              os.path.splitext(f)[1] in ['.py', '.bo']]
             self.scripts = s
 
         else:
             self.scripts = [NULL_STR]
-            if self.confirmation_dialog('Default Bakeout script directory does not exist. \
-Add {}'.format(sd)):
+            if self.confirmation_dialog('Default Bakeout script directory does not exist.\nAdd {}'.format(sd)):
                 os.mkdir(sd)
 
-    def _get_ok_to_run(self):
-        ok = True
-        if not self.record_process:
-            if self.script == NULL_STR:
-                ok = not (self.setpoint == 0 or self.duration == 0)
-        else:
-            ok = not self.duration == 0
-
-        return ok
-
     def on_led_action(self):
-    #        if self.isAlive():
+        # if self.isAlive():
         if self.isActive():
             self.end()
         else:
@@ -156,7 +146,7 @@ Add {}'.format(sd)):
         """
         """
         self.cnt = 0
-        self.start_time = time.time()
+        self._start_time = time.time()
         self.active = True
 
         self._check_buffer = []
@@ -175,7 +165,7 @@ Add {}'.format(sd)):
             self.heating = False
             self._duration_timeout = False
 
-            #            if self._active_script is not None:
+            # if self._active_script is not None:
             #                self._active_script.cancel()
 
             t = BakeoutPyScript(root=os.path.join(paths.scripts_dir,
@@ -201,7 +191,7 @@ Add {}'.format(sd)):
             time.sleep(0.05)
 
         self.info('starting update timer')
-        self._timer = Timer(self.update_interval * 1000., self._update_)
+        self._timer = Timer(self.update_interval * 1000., self._update)
 
     def ramp_to_setpoint(self, ramp, setpoint, scale):
         """
@@ -251,6 +241,7 @@ Add {}'.format(sd)):
     def end(self, user_kill=False, script_kill=False, msg=None, error=None):
 
         if self.isActive():
+            self.debug('End.  user_kill={}, msg={}, error={}'.format(user_kill, msg, error))
             if msg is None:
                 msg = 'bakeout finished'
                 self.info(msg)
@@ -282,7 +273,8 @@ Add {}'.format(sd)):
         self.process_value_flag = True
         return t
 
-    def _update_(self):
+    # private
+    def _update(self):
         """
         """
         if self.isActive():
@@ -297,10 +289,10 @@ Add {}'.format(sd)):
         self.get_temp_and_power(verbose=False)
         if self._check_temp_enabled:
             self._check_temp()
-            #        self.get_temp_and_power(verbose=True)
+            # self.get_temp_and_power(verbose=True)
 
         if self._duration_timeout:
-            if time.time() - self.start_time > self._oduration * 3600.:
+            if time.time() - self._start_time > self._oduration * 3600.:
                 self.end()
 
     def _check_temp(self):
@@ -323,20 +315,20 @@ Add {}'.format(sd)):
                     self.led.state = False
                     self.active = False
 
-                    #                    self.alive = False
-                    self.warning('controller failed to heat average temp= {}, duration={}'.format(avgtemp,
-                                                                                                  self._check_temp_minutes))
-                    self.warning_dialog(
-                        'Controller failed to heat. Average temp.={:0.1f} after {} minutes. Check thermocouple and heating tape'. \
-                            format(avgtemp, self._check_temp_minutes), sound='alarm1')
+                    # self.alive = False
+                    self.warning('controller failed to heat '
+                                 'average temp= {}, duration={}'.format(avgtemp, self._check_temp_minutes))
+                    self.warning_dialog('Controller failed to heat. Average temp.={:0.1f} after {} minutes. '
+                                        'Check thermocouple and heating tape'. \
+                                        format(avgtemp, self._check_temp_minutes), sound='alarm1')
 
             self._check_buffer = cb
-            #===============================================================================
-            # handlers
-            #===============================================================================
 
+    # ===============================================================================
+    # handlers
+    # ===============================================================================
     def _state_button_fired(self):
-    #        if self.isAlive():
+        # if self.isAlive():
         if self.isActive():
             self.user_cancel = True
             self.end()
@@ -355,21 +347,31 @@ Add {}'.format(sd)):
         self.setpoint = 0
         self.execute_dirty = True
 
-    #===============================================================================
+    # ===============================================================================
     # property get/set
-    #===============================================================================
+    # ===============================================================================
+    def _get_ok_to_run(self):
+        ok = True
+        if not self.record_process:
+            if self.script == NULL_STR:
+                ok = not (self.setpoint == 0 or self.duration == 0)
+        else:
+            ok = not self.duration == 0
+
+        return ok
+
     def _get_state_label(self):
-    #        return 'Stop' if self.isAlive() else 'Start'
+        # return 'Stop' if self.isAlive() else 'Start'
         return 'Stop' if self.isActive() else 'Start'
 
     def _get_duration(self):
         return self._duration
 
     def _set_duration(self, v):
-    #        if self.isAlive():
+        # if self.isAlive():
         if self.isActive():
             self._oduration = v
-            self.start_time = time.time()
+            self._start_time = time.time()
         else:
             self.execute_dirty = True
 
@@ -389,13 +391,13 @@ Add {}'.format(sd)):
     def _get_state_enabled(self):
         return self.ok_to_run and self._state_enabled
 
-    #===============================================================================
+    # ===============================================================================
     # defaults
-    #===============================================================================
+    # ===============================================================================
     def _led_default(self):
         return ButtonLED(callable=self.on_led_action)
 
-    #============= views ===================================
+    # ============= views ===================================
     def traits_view(self):
         """
         """
@@ -426,7 +428,7 @@ Add {}'.format(sd)):
                     Label(self.name[-1]),
                     Item('led', editor=LEDEditor(),
                          show_label=False, style='custom'),
-                    state_item,))
+                    state_item, ))
             process_grp = HGroup(
                 spring,
                 Item('process_value', label='Temp (C)',
@@ -455,14 +457,5 @@ Add {}'.format(sd)):
                          enabled_when='not active'),
                     process_grp)))
         return v
-#============= EOF ====================================
-#    def kill(self):
-#        self.led.state = 'red'
-# #        if self.isAlive() and self.isActive():
-#        if self.isActive():
-#            self.info('killing')
-#            if self._active_script is not None:
-#                self._active_script._alive = False
-#
-#            if abs(self.setpoint) > 0.001:
-#                self.set_closed_loop_setpoint(0)
+
+# ============= EOF ====================================

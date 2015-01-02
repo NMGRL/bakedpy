@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from PySide.QtGui import QColor
 from traits.api import HasTraits, Int, Color, Str, Event, Bool
 from traitsui.api import View, UItem
@@ -22,10 +22,10 @@ from traitsui.api import View, UItem
 from pychron.application_controller import ApplicationController
 from pychron.core.ui.display_editor import DisplayEditor
 from pychron.core.ui.gui import invoke_in_main_thread
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from threading import Lock
 from Queue import Queue
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 # from pychron.viewable import Viewable
 
 class DisplayModel(HasTraits):
@@ -169,4 +169,4 @@ class ErrorDisplay(DisplayController):
     pass
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

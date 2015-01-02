@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import HasTraits, Bool, Instance, List, Dict
 # from traitsui.api import View, Item
 from pychron.envisage.tasks.base_task_plugin import BaseTaskPlugin
@@ -32,8 +32,8 @@ from pyface.tasks.action.schema_addition import SchemaAddition
 from pychron.hardware.tasks.hardware_preferences import HardwarePreferencesPane
 from pychron.remote_hardware.remote_hardware_manager import RemoteHardwareManager
 from apptools.preferences.preference_binding import bind_preference
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 class Preference(HasTraits):
     pass
 
@@ -169,4 +169,4 @@ class HardwarePlugin(BaseTaskPlugin):
                 #if s._scanning and not s._auto_started:
 
 #                s.save_to_db()
-#============= EOF =============================================
+# ============= EOF =============================================

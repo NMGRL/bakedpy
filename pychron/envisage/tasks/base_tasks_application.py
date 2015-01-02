@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from pyface.dialog import Dialog
 from traits.api import List, Instance
 from envisage.ui.tasks.tasks_application import TasksApplication
 from pyface.tasks.task_window_layout import TaskWindowLayout
-#============= standard library imports ========================
+# ============= standard library imports ========================
 import weakref
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.globals import globalv
 from pychron.loggable import Loggable
 from pychron.hardware.core.i_core_device import ICoreDevice
@@ -99,4 +99,4 @@ class BaseTasksApplication(TasksApplication, Loggable):
 
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

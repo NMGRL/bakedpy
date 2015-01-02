@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
-#============= standard library imports ========================
+# ============= enthought library imports =======================
+# ============= standard library imports ========================
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy import Column, Integer, String, \
     ForeignKey, BLOB, Float, Boolean, DateTime, CHAR
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Table
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 
 from pychron.database.core.base_orm import BaseMixin, NameMixin
 # from pychron.database.core.base_orm import PathMixin, ResultsMixin, ScriptTable
@@ -145,10 +145,10 @@ class gen_UserTable(Base, NameMixin):
     password = stringcolumn(80)
     salt = stringcolumn(80)
 
-    #===========================================================================
+    # ===========================================================================
     # permissions
-    #===========================================================================
+    # ===========================================================================
     max_allowable_runs = Column(Integer, default=25)
     can_edit_scripts = Column(Boolean, default=False)
 
-#============= EOF =============================================
+# ============= EOF =============================================

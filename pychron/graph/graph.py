@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 from traits.api import Instance, Any, Bool, \
     List, Str, Property, Dict, Callable
 from traitsui.api import View, Item
@@ -28,12 +28,12 @@ from chaco.tools.api import ZoomTool, LineInspector, RangeSelection, \
 from chaco.axis import PlotAxis
 from pyface.api import FileDialog, OK
 from pyface.timer.api import do_after as do_after_timer
-#=============standard library imports ========================
+# =============standard library imports ========================
 # import numpy as np
 from numpy import array, hstack, Inf
 import csv
 import math
-#=============local library imports  ==========================
+# =============local library imports  ==========================
 from pychron.core.helpers.color_generators import colorname_generator as color_generator
 from pychron.graph.minor_tick_overlay import MinorTicksOverlay
 # from editors.plot_editor import PlotEditor
@@ -1691,4 +1691,4 @@ class Graph(Viewable, ContextMenuMixin):
             v.id = self.view_identifier
         return v
 
-        #============= EOF ====================================
+        # ============= EOF ====================================

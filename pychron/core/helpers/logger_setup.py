@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 
-#=============standard library imports ========================
+# =============standard library imports ========================
 import os
 import logging
-#=============local library imports  =========================
+# =============local library imports  =========================
 from pychron.paths import paths
 from filetools import unique_path2
 import shutil
@@ -130,4 +130,4 @@ def wrap(items, width=40, indent=90, delimiter=','):
 
     return ',\n{}'.format(' ' * indent).join(rs)
 
-#============================== EOF ===================================
+# ============================== EOF ===================================

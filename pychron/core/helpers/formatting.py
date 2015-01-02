@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 
-#============= standard library imports ========================
+# ============= standard library imports ========================
 import math
 from functools import partial
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 def calc_percent_error(v, e, n=2):
     try:
 
@@ -70,4 +70,4 @@ def floatfmt(f, n=4, s=2, max_width=None):
 def pfloatfmt(**kw):
     return partial(floatfmt, **kw)
 
-#============= EOF =============================================
+# ============= EOF =============================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from pyface.action.action import Action
 from pyface.tasks.action.task_action import TaskAction
 from pyface.tasks.task_window_layout import TaskWindowLayout
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.envisage.resources import icon
 
 
@@ -69,4 +69,4 @@ class JumpToGosubAction(TaskAction):
     image = icon('script_go.png')
     method='jump_to_gosub'
     tooltip = 'Jump to gosub defined at the current line. CMD+click on a gosub will also work.'
-#============= EOF =============================================
+# ============= EOF =============================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 from traits.api import HasTraits, Str, implements, Any, List, \
     Bool, Enum
 # from pyface.timer.api import Timer
-#=============standard library imports ========================
+# =============standard library imports ========================
 import random
 # from threading import Lock
 from datetime import datetime
-#=============local library imports  ==========================
+# =============local library imports  ==========================
 from i_core_device import ICoreDevice
 # from pychron.core.helpers.timer import Timer
 # from pychron.managers.data_managers.csv_data_manager import CSVDataManager
@@ -272,9 +272,9 @@ class CoreDevice(ScanableDevice, RPCable, HasCommunicator, ConsumerMixin):
 
         return resp
 
-    #===============================================================================
+    # ===============================================================================
     # scanable interface
-    #===============================================================================
+    # ===============================================================================
     def _scan_hook(self, v):
         for a in self.alarms:
             if a.test_condition(v):
@@ -286,4 +286,4 @@ class CoreDevice(ScanableDevice, RPCable, HasCommunicator, ConsumerMixin):
                 break
 
 
-#========================= EOF ============================================
+# ========================= EOF ============================================

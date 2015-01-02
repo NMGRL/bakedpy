@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,18 +13,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports  ==========================
+# ============= enthought library imports  ==========================
 from traits.api import Instance, Bool, Button, Event, \
     Float, Str, Property, List, on_trait_change, Dict, Any, cached_property
 
-#============= standard library imports  ==========================
+# ============= standard library imports  ==========================
 from numpy import hstack
 import os
 import time
 from ConfigParser import NoSectionError
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.managers.manager import Manager
 from pychron.hardware.bakeout_controller import BakeoutController
 from pychron.hardware.core.communicators.scheduler import CommunicationScheduler
@@ -207,9 +207,9 @@ class BakeoutManager(Manager):
 #             c.stop_timer()
 #
 #         self._clean_archive()
-#==============================================================================
+# ==============================================================================
 # private
-#==============================================================================
+# ==============================================================================
     def _load_controllers(self):
         '''
         '''
@@ -293,9 +293,9 @@ class BakeoutManager(Manager):
         self.info('cleaning bakeout data directory {}'.format(root))
         a = Archiver(root=root, archive_days=14, archive_months=8)
         a.clean(spawn_process=False)
-#===============================================================================
+# ===============================================================================
 # graph
-#===============================================================================
+# ===============================================================================
     def _setup_graph(self, name, pid):
         self.graph.new_series()
         self.graph_info[name] = dict(id=pid)
@@ -351,10 +351,11 @@ class BakeoutManager(Manager):
 #         self.data_buffer = []
 #         self.data_buffer_x = []
 #         self.data_count_flag = 0
-#===============================================================================
+# ===============================================================================
 # datamanager
-#===============================================================================
+# ===============================================================================
     def _write_data(self, buf, buf_x):
+        self.debug('Write data x={}, data={}'.format(buf_x[0], buf))
         if isinstance(self.data_manager, CSVDataManager):
             self._write_csv_data(buf, buf_x)
         else:
@@ -403,9 +404,9 @@ class BakeoutManager(Manager):
 
         self.data_manager.write_to_frame(container)
 
-#===============================================================================
+# ===============================================================================
 # classifier
-#===============================================================================
+# ===============================================================================
     def _classifier_save(self):
         if self.confirmation_dialog('Use data for classification'):
             classification = self.confirmation_dialog('Classify this bake as successful?')
@@ -439,9 +440,9 @@ class BakeoutManager(Manager):
             gys.append([x['value'] for x in temptable])
             gps.append([x['value'] for x in heattable])
         return gxs, gys, gps
-#===============================================================================
+# ===============================================================================
 # database
-#===============================================================================
+# ===============================================================================
     def _db_save(self):
 #        if not self.db_save_dialog():
 ##            self._db_rollback()
@@ -481,13 +482,15 @@ class BakeoutManager(Manager):
             for c in controllers:
                 db.add_controller(b, name=c.name, script=c.script,
                                   setpoint=c.setpoint, duration=c.duration)
-#===============================================================================
+# ===============================================================================
 # handlers
-#===============================================================================
+# ===============================================================================
     @on_trait_change('bakeout+:active')
     def update_active(self, obj, name, old, new):
+        self.debug('ACTIVE CHANGED -- controller -- name={}, old={}, new={}'.format(obj.name, old, new))
         if new:
             self.active = new
+
         else:
             self.active = bool(len(self._get_active_controllers()))
 
@@ -514,7 +517,6 @@ class BakeoutManager(Manager):
         dl = self.scan_window * 60 / v
         self.graph.set_data_limits(dl)
 
-
     def _configuration_changed(self):
         for tr in self._get_controller_names():
             kw = dict()
@@ -531,6 +533,7 @@ class BakeoutManager(Manager):
             self._parse_config_file(os.path.join(paths.bakeout_config_dir, self.configuration))
 
     def _active_changed(self, name, old, new):
+        self.debug('ACTIVE CHANGED -- manager -- old={}, new={}'.format(old, new))
         if old and not new and not self._suppress_commit:
             if self.database is not None:
                 ok_to_commit = True
@@ -584,9 +587,9 @@ class BakeoutManager(Manager):
 
         self.data_queue.put((obj.name, pid, pv, hp))
 
-#==============================================================================
+# ==============================================================================
 # Button handlers
-#==============================================================================
+# ==============================================================================
     def _save_fired(self):
 
         path = self._file_dialog_('save as',
@@ -647,9 +650,9 @@ class BakeoutManager(Manager):
                 c.state_enabled = True
 #                    self._training_controllers.append(c.name)
 #                    states.append(True)
-#===============================================================================
+# ===============================================================================
 # property get/set
-#===============================================================================
+# ===============================================================================
     @cached_property
     def _get_configurations(self):
         cs = ['---']
@@ -683,9 +686,9 @@ class BakeoutManager(Manager):
         ok_to_run_bit = any([tr.ok_to_run for tr in self._get_controllers()])
         return include_bit and ok_to_run_bit
 
-#===============================================================================
+# ===============================================================================
 # factories
-#===============================================================================
+# ===============================================================================
     def _controller_factory(self, name):
         bc = BakeoutController(name=name,
                                configuration_dir_name='bakeout',
@@ -805,9 +808,9 @@ class BakeoutManager(Manager):
             graph.set_x_limits(0, self.scan_window * 60)
 
         return graph
-#===============================================================================
+# ===============================================================================
 # defaults
-#===============================================================================
+# ===============================================================================
     def _graph_default(self):
         g = self._graph_factory()
         return g
@@ -846,9 +849,9 @@ class BakeoutManager(Manager):
 
         return db
 
-#==============================================================================
+# ==============================================================================
 # Pressure
-#==============================================================================
+# ==============================================================================
     def _get_pressure(self, x):
         if self.gauge_controller:
             pressure = self.gauge_controller.get_ion_pressure()

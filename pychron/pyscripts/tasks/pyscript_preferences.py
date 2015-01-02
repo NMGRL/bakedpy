@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +12,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Bool
 from traitsui.api import View, Item
 from envisage.ui.tasks.preferences_pane import PreferencesPane
 
 from pychron.envisage.tasks.base_preferences_helper import BasePreferencesHelper
 
+
+
 # from pychron.pychron_constants import PLUSMINUS
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 
 class PyScriptPreferences(BasePreferencesHelper):
     name = 'Scripts'
@@ -39,4 +41,4 @@ class PyScriptPreferencesPane(PreferencesPane):
         v = View(Item('auto_detab'))
         return v
 
-        #============= EOF =============================================
+        # ============= EOF =============================================

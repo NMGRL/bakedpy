@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +12,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from envisage.ui.tasks.preferences_pane import PreferencesPane
 from traits.api import List, Button, Any, Int, Str, Enum, Color
 from traitsui.api import View, VGroup, UItem, HGroup
 from apptools.preferences.api import PreferencesHelper
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from traitsui.list_str_adapter import ListStrAdapter
 
 
@@ -135,4 +135,4 @@ class BaseConsolePreferencesPane(PreferencesPane):
                         label=self.label))
         return v
 
-    #============= EOF =============================================
+    # ============= EOF =============================================

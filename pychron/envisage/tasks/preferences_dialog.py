@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from envisage.ui.tasks.preferences_category import PreferencesCategory
 from envisage.ui.tasks.preferences_dialog import PreferencesDialog, PreferencesTab
 from pyface.tasks.topological_sort import before_after_sort
 from traitsui.api import View, ListStrEditor, \
     UItem, HSplit
 from traits.api import on_trait_change, List, Str
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 
 
 class myPreferencesDialog(PreferencesDialog):
@@ -101,4 +101,4 @@ class myPreferencesDialog(PreferencesDialog):
         self.names = names
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

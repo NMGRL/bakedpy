@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Float, Int
 from traitsui.qt4.editor import Editor
 
 from traitsui.basic_editor_factory import BasicEditorFactory
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from PySide.QtGui import QPainter, QColor, QFrame
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from matplotlib.cm import get_cmap
 
 class Bar(QFrame):
@@ -77,4 +77,4 @@ class BarGaugeEditor(BasicEditorFactory):
     high = Float
     color_scalar = Int
     width = Int(100)
-#============= EOF =============================================
+# ============= EOF =============================================

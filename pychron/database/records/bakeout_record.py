@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Instance, DelegatesTo, Button
 from traitsui.api import Item, VGroup, HGroup, spring, Group, UItem
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from traits.api import HasTraits, Date, Int
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.bakeout.bakeout_graph_viewer import BakeoutGraphViewer
 # from pychron.database.records.sqlite_record import SQLiteRecord
 from pychron.database.records.sqlite_record import SQLiteRecord
@@ -132,4 +132,4 @@ class BakeoutRecord(SQLiteRecord):
 #                                      button_grp
 #                                      ))
 #         return v
-#============= EOF =============================================
+# ============= EOF =============================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 # from envisage.ui.workbench.api import WorkbenchApplication
 # from pyface.api import AboutDialog, SplashScreen
 # from pyface.image_resource import ImageResource
-#============= standard library imports ========================
+# ============= standard library imports ========================
 
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pyface.tasks.task_window_layout import TaskWindowLayout
+
 from pychron.applications.pychron_application import PychronApplication
+
 
 class Bakedpy(PychronApplication):
     '''
@@ -33,5 +35,5 @@ class Bakedpy(PychronApplication):
     default_layout = [TaskWindowLayout('bakeout.main',
                                        size=(800, 800)) ]
 
-#============= views ===================================
-#============= EOF ====================================
+# ============= views ===================================
+# ============= EOF ====================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
-#============= enthought library imports =======================
+# ===============================================================================
+# ============= enthought library imports =======================
 from traits.api import Event, Property, Any, Bool, Float, Str, Instance
 from traitsui.api import HGroup, VGroup, Item, spring, ButtonEditor
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from threading import Lock
 import os
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.hardware.core.viewable_device import ViewableDevice
 from pychron.graph.plot_record import PlotRecord
 from pychron.managers.data_managers.h5_data_manager import H5DataManager
@@ -62,9 +62,9 @@ class ScanableDevice(ViewableDevice):
         self.scan_root = os.path.split(self.scan_path)[0]
         self.scan_name = os.path.basename(self.scan_path)
 
-    #===============================================================================
+    # ===============================================================================
     # streamin interface
-    #===============================================================================
+    # ===============================================================================
     def setup_scan(self):
         # should get scan settings from the config file not the initialization.xml
         config = self.get_configuration()
@@ -291,4 +291,4 @@ class ScanableDevice(ViewableDevice):
         v.content.content.append(g)
         return v
 
-        #============= EOF =============================================
+        # ============= EOF =============================================

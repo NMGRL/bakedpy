@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,19 +12,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 from traits.api import Str, Float, Any, Button, Int, List, Bool
 from traitsui.api import  Item, HGroup, VGroup, \
     RangeEditor, ButtonEditor, ScrubberEditor, Label, spring
 from traitsui.menu import Action, Menu, MenuBar
 from pyface.api import FileDialog, OK, DirectoryDialog
-#=============standard library imports ========================
+# =============standard library imports ========================
 import os
 from threading import Thread
 import time
-#=============local library imports  ==========================
+# =============local library imports  ==========================
 from pychron.viewable import Viewable, ViewableHandler
 from pychron.rpc.rpcable import RPCable
 # from pychron.envisage.core.action_helper import MANAGERS
@@ -285,9 +285,9 @@ class Manager(Viewable, RPCable):
 
         return class_factory
 
-#===============================================================================
+# ===============================================================================
 #  flags
-#===============================================================================
+# ===============================================================================
     def add_flag(self, f):
         from pychron.hardware.flag import Flag
         ff = Flag(f)
@@ -361,9 +361,9 @@ class Manager(Viewable, RPCable):
 #            getattr(f, func)()
 #        else:
 #            self.warning('Invalid flag {}'.format(name))
-#===============================================================================
+# ===============================================================================
 #
-#===============================================================================
+# ===============================================================================
     def create_manager(self, manager, **kw):
 
         '''
@@ -630,4 +630,4 @@ class Manager(Viewable, RPCable):
         menus = self.menus_factory()
         return MenuBar(*menus)
 
-#=================== EOF =================================================
+# =================== EOF =================================================

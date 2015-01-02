@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
-#============= standard library imports ========================
+# ============= enthought library imports =======================
+# ============= standard library imports ========================
 from sqlalchemy import Column, Integer, BLOB, Float, DateTime
 from sqlalchemy.orm import relationship
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 
 from pychron.database.core.base_orm import BaseMixin
 # from pychron.database.core.base_orm import PathMixin, ResultsMixin, ScriptTable
@@ -42,4 +42,4 @@ class spec_MassCalScanTable(Base, BaseMixin):
     molecular_weight_id = foreignkey('gen_MolecularWeightTable')
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,22 +12,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 import os
+
 from traits.api import List, Instance, Str, Property, Any, String, Button
 from traitsui.api import View, Item, UItem, InstanceEditor, ButtonEditor, VGroup, TabularEditor, \
     HGroup, spring, VSplit, Label
 from pyface.tasks.traits_dock_pane import TraitsDockPane
 from traitsui.tabular_adapter import TabularAdapter
+
 from pychron.envisage.tasks.pane_helpers import icon_button_editor
 from pychron.core.ui.custom_label_editor import CustomLabel
 from pychron.core.ui.tabular_editor import myTabularEditor
 
+
 # from pychron.pyscripts.commands.core import ICommand
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 
 class ControlPane(TraitsDockPane):
     name = 'Control'
@@ -231,4 +234,4 @@ class ScriptBrowserPane(TraitsDockPane):
     def _get_selected_directory_name(self):
         return os.path.basename(self.root)
 
-#============= EOF =============================================
+# ============= EOF =============================================

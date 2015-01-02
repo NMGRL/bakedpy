@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
-#============= standard library imports ========================
+# ============= enthought library imports =======================
+# ============= standard library imports ========================
 import uuid
 
 from sqlalchemy import Column, Integer, String, \
@@ -24,7 +24,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql.expression import func
 
 
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.database.orms.isotope.util import foreignkey, stringcolumn
 from pychron.database.core.base_orm import BaseMixin, NameMixin
 
@@ -218,4 +218,4 @@ class meas_MonitorTable(Base, NameMixin):
 #     extraction_id = foreignkey('meas_ExtractionTable')
 #     is_degas = Column(Boolean)
 #     position = Column(Integer)
-#============= EOF =============================================
+# ============= EOF =============================================

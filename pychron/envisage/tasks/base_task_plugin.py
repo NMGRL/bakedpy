@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from pyface.tasks.action.dock_pane_toggle_group import DockPaneToggleGroup
 from traits.api import List
 from envisage.plugin import Plugin
 from envisage.service_offer import ServiceOffer
 from envisage.ui.tasks.task_extension import TaskExtension
 from pyface.tasks.action.schema_addition import SchemaAddition
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 
 class BaseTaskPlugin(Plugin):
     SERVICE_OFFERS = 'envisage.service_offers'
@@ -82,4 +82,4 @@ class BaseTaskPlugin(Plugin):
         return True
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

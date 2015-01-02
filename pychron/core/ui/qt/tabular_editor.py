@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from PySide.QtGui import QKeySequence, QDrag, QAbstractItemView, QTableView, QApplication
 from PySide.QtGui import QFont, QFontMetrics
 
@@ -24,8 +24,8 @@ from traitsui.editors.tabular_editor import TabularEditor
 from traitsui.qt4.tabular_editor import TabularEditor as qtTabularEditor, \
     _TableView
 from traitsui.mimedata import PyMimeData
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.core.helpers.ctx_managers import no_update
 from pychron.consumer_mixin import ConsumerMixin
 
@@ -348,4 +348,4 @@ class myTabularEditor(TabularEditor):
     drag_external = Bool(False)
     def _get_klass(self):
         return _TabularEditor
-#============= EOF =============================================
+# ============= EOF =============================================

@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import HasTraits, List
 from traitsui.api import View, Item, ListEditor, InstanceEditor, \
     Group, VGroup
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.hardware.flag import Flag, TimedFlag
 from pychron.viewable import Viewable
 
@@ -92,4 +92,4 @@ if __name__ == '__main__':
 #
 #    fm.configure_traits()
     Demo().configure_traits()
-#============= EOF =============================================
+# ============= EOF =============================================

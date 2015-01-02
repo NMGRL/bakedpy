@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
 
 
-#=============enthought library imports=======================
+# =============enthought library imports=======================
 from traits.api import List, Str, HasTraits, Float, Int
 from traitsui.api import View, HGroup, Item, ListEditor, InstanceEditor, Group
-#=============standard library imports ========================
+# =============standard library imports ========================
 from numpy import random, char
 
-#=============local library imports  ==========================
+# =============local library imports  ==========================
 from pychron.hardware.core.core_device import CoreDevice
 # from pychron.core.ui.color_map_bar_editor import BarGaugeEditor
 import time
@@ -272,4 +272,4 @@ class MicroIonController(CoreDevice):
         return r
 
 
-#============= EOF ====================================
+# ============= EOF ====================================

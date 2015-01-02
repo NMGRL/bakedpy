@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 
 # from pychron.core.ui.thread import Thread
 from threading import Thread
 from Queue import Queue, Empty
+
 from pychron.core.ui.gui import invoke_in_main_thread
+
 
 class ConsumerMixin(object):
     def setup_consumer(self, func=None, buftime=None, auto_start=True, main=False):
@@ -129,4 +131,4 @@ class consumable(object):
         self._func = None
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

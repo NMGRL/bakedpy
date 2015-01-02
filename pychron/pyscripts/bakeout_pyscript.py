@@ -1,32 +1,32 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
 
-
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Any
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from numpy import linspace
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.pyscripts.pyscript import PyScript, makeRegistry, verbose_skip
 import time
 
 
 TIMEDICT = dict(s=1, m=60.0, h=60.0 * 60.0)
 command_register = makeRegistry()
+
 
 class BakeoutPyScript(PyScript):
     controller = Any
@@ -39,13 +39,12 @@ class BakeoutPyScript(PyScript):
         # convert to hours
         xs = [xi / 3600. for xi in xs]
         from pychron.graph.graph import Graph
+
         g = Graph(container_dict=dict(padding=[50, 10, 10, 50],
                                       bgcolor='gray'),
-                   window_title='Bakeout Profile'
-                  )
+                  window_title='Bakeout Profile')
         g.new_plot(xtitle='Time (hrs)',
-                   ytitle='Temperature (C)',
-                   )
+                   ytitle='Temperature (C)')
         g.new_series(xs, ys)
         g.set_y_limits(min(ys), max(ys), pad=10)
         g.edit_traits()
@@ -68,16 +67,16 @@ class BakeoutPyScript(PyScript):
         rate = float(rate)
         period = float(period)
 
-#        if self._graph_calc:
-#
-#            xs = self._xs[-1]
-#            ds = temperature - self._current_setpoint
-#            self._current_setpoint = temperature
-#
-#            dx = ds / (rate / 3600.)
-#            self._xs.append(xs + dx)
-#            self._ys.append(temperature)
-#            return
+        # if self._graph_calc:
+        #
+        #            xs = self._xs[-1]
+        #            ds = temperature - self._current_setpoint
+        #            self._current_setpoint = temperature
+        #
+        #            dx = ds / (rate / 3600.)
+        #            self._xs.append(xs + dx)
+        #            self._ys.append(temperature)
+        #            return
 
         if self._cancel:
             return
@@ -93,11 +92,7 @@ class BakeoutPyScript(PyScript):
                     ctemp = int(t)
                     start = max(start, ctemp)
 
-        self.info('ramping from {} to {} rate= {} C/h, period= {} s'.format(start,
-                                                                    temperature,
-                                                                    rate,
-                                                                    period
-                                                                    ))
+        self.info('ramping from {} to {} rate= {} C/h, period= {} s'.format(start, temperature, rate, period))
 
         dT = temperature - start
         dur = abs(dT / rate)
@@ -107,9 +102,6 @@ class BakeoutPyScript(PyScript):
                 c.heating = True
             else:
                 c.heating = False
-        # convert period to hours
-#        hperiod = period / 3600.
-#        steps = linspace(start, temperature, dur * 3600 / float(period))
 
         check_period = 0.5
         samples_per_hr = 3600 / float(period)
@@ -125,23 +117,26 @@ class BakeoutPyScript(PyScript):
                     time.sleep(check_period)
                 else:
                     continue
-                
+
                 break
             else:
                 time.sleep(period)
+
+        if c is not None:
+            c.heating = False
 
     @verbose_skip
     @command_register
     def setpoint(self, temperature=0, duration=0, units='h'):
 
         ts = TIMEDICT[units]
-#        if self._graph_calc:
-#            self._current_setpoint = temperature
-#            self._xs.append(self._xs[-1])
-#            self._xs.append(self._xs[-1] + duration * ts)
-#            self._ys.append(temperature)
-#            self._ys.append(temperature)
-#            return
+        # if self._graph_calc:
+        #            self._current_setpoint = temperature
+        #            self._xs.append(self._xs[-1])
+        #            self._xs.append(self._xs[-1] + duration * ts)
+        #            self._ys.append(temperature)
+        #            self._ys.append(temperature)
+        #            return
 
         if self._cancel:
             return
@@ -152,11 +147,10 @@ class BakeoutPyScript(PyScript):
         self.info('setting setpoint to {} for {}'.format(temperature, duration))
         c = self.controller
         if c is not None:
-
             self._set_setpoint(temperature)
             # convert back to hours
             c.trait_set(duration=duration / 3600.,
-                                 heating=True)
+                        heating=True)
 
         self._block(duration)
 
@@ -170,4 +164,5 @@ class BakeoutPyScript(PyScript):
             c.set_closed_loop_setpoint(sp)
         else:
             c.setpoint = sp
-#============= EOF ====================================
+
+# ============= EOF ====================================

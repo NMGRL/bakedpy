@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 import re
+
 from traits.api import Array, List, Event, Property, Any, \
     Dict, Str, Bool
-#============= standard library imports ========================
+
+# ============= standard library imports ========================
 import math
 from numpy import where, delete
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.loggable import Loggable
 from tinv import tinv
 from pychron.pychron_constants import ALPHAS
@@ -301,4 +303,4 @@ class BaseRegressor(Loggable):
 #            lower=[]
 #                lower.append(rmodel[i] - cor)
 #                upper.append(rmodel[i] + cor)
-#============= EOF =============================================
+# ============= EOF =============================================

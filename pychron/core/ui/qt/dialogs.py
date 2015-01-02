@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2012 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 # from traits.api import HasTraits
 import time
 from threading import Event
@@ -26,11 +26,13 @@ from pyface.message_dialog import MessageDialog
 from pychron.core.ui.gui import invoke_in_main_thread
 
 
+
+
 #from pyface.confirmation_dialog import ConfirmationDialog
 
-#============= enthought library imports =======================
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= enthought library imports =======================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 class myMessageMixin(object):
     '''
         makes  message dialogs thread save. 
@@ -127,4 +129,4 @@ class myConfirmationDialog(myMessageMixin, _ConfirmationDialog):
 
 
 
-#============= EOF =============================================
+# ============= EOF =============================================

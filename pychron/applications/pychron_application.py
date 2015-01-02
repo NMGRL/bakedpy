@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from datetime import datetime
+
 from traits.api import List
 from pyface.api import SplashScreen
 from pyface.image_resource import ImageResource
-#============= standard library imports ========================
+
+# ============= standard library imports ========================
 import os
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.applications.about_dialog import myAboutDialog
 from pychron.envisage.tasks.base_tasks_application import BaseTasksApplication
 from pychron.paths import paths
@@ -87,5 +89,5 @@ class PychronApplication(BaseTasksApplication):
 
 
 
-#============= views ===================================
-#============= EOF ====================================
+# ============= views ===================================
+# ============= EOF ====================================

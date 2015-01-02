@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2013 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 import os
 import subprocess
+
 from pyface.tasks.action.dock_pane_toggle_group import DockPaneToggleGroup
 from traits.api import Any, on_trait_change, List, Unicode, DelegatesTo
+
+
 # from traitsui.api import View, Item
 from pyface.tasks.task import Task
 from pyface.tasks.action.schema import SMenu, SMenuBar, SGroup
@@ -37,8 +40,8 @@ from pyface.confirmation_dialog import ConfirmationDialog
 from pychron.core.helpers.filetools import add_extension
 from pychron.loggable import Loggable
 
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.core.ui.gui import invoke_in_main_thread
 
 
@@ -509,4 +512,4 @@ class BaseHardwareTask(BaseManagerTask):
 # class BaseManagerTask(BaseTask):
 #    manager = Any
 
-#============= EOF =============================================
+# ============= EOF =============================================

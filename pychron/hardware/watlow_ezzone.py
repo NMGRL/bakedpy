@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#=============enthought library imports========================
+# =============enthought library imports========================
 import os
+
 from traits.api import Enum, Float, Event, Property, Int, Button, Bool, Str, Any, on_trait_change, String
 from traitsui.api import View, HGroup, Item, Group, VGroup, EnumEditor, RangeEditor, ButtonEditor, spring
+
 # from pyface.timer.api import Timer
 
-#=============standard library imports ========================
+# =============standard library imports ========================
 # import sys, os
-#=============local library imports  ==========================
+# =============local library imports  ==========================
 # sys.path.insert(0, os.path.join(os.path.expanduser('~'),
 #                               'Programming', 'mercurial', 'pychron_beta'))
 
@@ -579,9 +581,9 @@ class WatlowEZZone(CoreDevice):
         value = 10 if mode == 'closed' else 54
         self.write(1880, value, **kw)
 
-    #===============================================================================
+    # ===============================================================================
     # Autotune
-    #===============================================================================
+    # ===============================================================================
     def autotune_finished(self, verbose=False, **kw):
         r = self.read(1920, response_type='int', verbose=verbose, **kw)
         try:
@@ -651,9 +653,9 @@ class WatlowEZZone(CoreDevice):
         self.info('setting TRU-TUNE+ gain {}'.format(value))
         self.write(1914, int(value), **kw)
 
-    #===============================================================================
+    # ===============================================================================
     #  PID
-    #===============================================================================
+    # ===============================================================================
     def set_pid(self, temp):
         """
             get pids from config
@@ -701,9 +703,9 @@ class WatlowEZZone(CoreDevice):
         register = 1898
         self.write(register, v, nregisters=2, **kw)
 
-    #===============================================================================
+    # ===============================================================================
     # Output
-    #===============================================================================
+    # ===============================================================================
     def set_output_function(self, value, **kw):
         inmap = {'heat': 36,
                  'off': 62}
@@ -757,9 +759,9 @@ class WatlowEZZone(CoreDevice):
         v = max(0, min(100, value))
         self.write(register, v, nregisters=2, **kw)
 
-    #===============================================================================
+    # ===============================================================================
     # readers
-    #===============================================================================
+    # ===============================================================================
     def read_output_state(self, **kw):
         rid = str(self.read(1012, response_type='int', **kw))
         units_map = {'63': 'On', '62': 'Off'}
@@ -917,9 +919,9 @@ class WatlowEZZone(CoreDevice):
     #        p = self.get_temperature()
     #        record_id = self.name
     #        self.stream_manager.record(p, record_id)
-    #===============================================================================
+    # ===============================================================================
     # setters
-    #===============================================================================
+    # ===============================================================================
     def _set_sensor1_type(self, v):
         self._sensor1_type = isensor_map[v]
         self.set_analog_input_sensor_type(1, self._sensor1_type)
@@ -1067,9 +1069,9 @@ class WatlowEZZone(CoreDevice):
         if abs(new - old) > tol:
             return new
 
-    #===============================================================================
+    # ===============================================================================
     # getters
-    #===============================================================================
+    # ===============================================================================
     def _get_pid_bin(self, temp):
         """
             load pid_bins from file
@@ -1165,9 +1167,9 @@ class WatlowEZZone(CoreDevice):
     def _get_max_output(self):
         return self._max_output
 
-    #===============================================================================
+    # ===============================================================================
     # handlers
-    #===============================================================================
+    # ===============================================================================
     def _autotune_fired(self):
         if self.autotuning:
             self.stop_autotune()
@@ -1307,7 +1309,7 @@ if __name__ == '__main__':
                      configuration_dir_name='diode')
     w.bootstrap()
     w.configure_traits(view='configure_view')
-#============================== EOF ==========================
+# ============================== EOF ==========================
 #        #read pid parameters
 #        ph = self.read_heat_proportional_band()
 #        if ph is not None:

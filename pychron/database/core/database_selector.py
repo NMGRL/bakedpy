@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from pyface.timer.do_later import do_later
 from traits.api import Button, List, Any, Dict, Bool, Int, Enum, Event, \
     on_trait_change, Str, Instance, Property
 from traitsui.api import View, Item, \
     HGroup, spring, ListEditor, InstanceEditor, Handler, VGroup, VSplit
 
-#============= standard library imports ========================
-#============= local library imports  ==========================
+# ============= standard library imports ========================
+# ============= local library imports  ==========================
 from pychron.database.core.database_adapter import DatabaseAdapter
 
 from pychron.database.core.query import Query, compile_query
@@ -181,9 +181,9 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
         if self.records:
             self._open_selected(records=self.records[-1:])
 
-    #===============================================================================
+    # ===============================================================================
     # private
-    #===============================================================================
+    # ===============================================================================
     def _add_query(self, add=True):
         pq = None
         if self.queries:
@@ -271,9 +271,9 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
         else:
             return self.record_klass(_dbrecord=dbrecord)
 
-            #===============================================================================
+            # ===============================================================================
             # open window
-            #===============================================================================
+            # ===============================================================================
 
     def _open_selected(self, records=None):
         self.debug('open selected')
@@ -374,9 +374,9 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
     def _get_num_records(self):
         return 'Number Results: {}'.format(len(self.records))
 
-    #===============================================================================
+    # ===============================================================================
     # handlers
-    #===============================================================================
+    # ===============================================================================
     def _delete_query_button_fired(self):
         self.remove_query(self.selected_query)
 
@@ -417,9 +417,9 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
             #                sel = sel[0]
             #            self.selected_row = self.records.index(sel)
             #            self.update = True
-            #===============================================================================
+            # ===============================================================================
             # factories
-            #===============================================================================
+            # ===============================================================================
 
     def _query_factory(self, removable=True, **kw):
         q = self.query_klass(selector=self,
@@ -433,9 +433,9 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
     #     di.on_trait_change(self._record_closed, 'close_event')
     #     return di
 
-    #===============================================================================
+    # ===============================================================================
     # views
-    #===============================================================================
+    # ===============================================================================
     def _get_button_grp(self):
         return HGroup(spring, Item('search', show_label=False), defined_when='style=="normal"')
 
@@ -490,14 +490,14 @@ class DatabaseSelector(Viewable, ColumnSorterMixin):
             v.buttons = ['OK', 'Cancel']
         return v
 
-    #===============================================================================
+    # ===============================================================================
     # defaults
-    #===============================================================================
+    # ===============================================================================
     def _queries_default(self):
         return [self._query_factory(removable=False)]
 
 
-#============= EOF =============================================
+# ============= EOF =============================================
 #        if criteria is None:
 #            criteria = self.criteria
 #        self.criteria = criteria

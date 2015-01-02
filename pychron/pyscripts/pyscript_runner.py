@@ -1,4 +1,4 @@
-#===============================================================================
+# ===============================================================================
 # Copyright 2011 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#===============================================================================
+# ===============================================================================
 
-#============= enthought library imports =======================
+# ============= enthought library imports =======================
 from traits.api import Any, Dict, List
 from traitsui.api import View, Item, TableEditor
-#============= standard library imports ========================
+# ============= standard library imports ========================
 from threading import Event, Lock
-#============= local library imports  ==========================
+# ============= local library imports  ==========================
 from pychron.core.helpers.logger_setup import logging_setup
 from traitsui.table_column import ObjectColumn
 from traitsui.extras.checkbox_column import CheckboxColumn
@@ -78,9 +78,9 @@ class RemoteResource(object):
     handle = None
     name = None
 
-#===============================================================================
+# ===============================================================================
 # threading.Event interface
-#===============================================================================
+# ===============================================================================
     def read(self, verbose=True):
         resp = self.handle.ask('Read {}'.format(self.name), verbose=verbose)
         if resp is not None:
@@ -128,4 +128,4 @@ if __name__ == '__main__':
     p = PyScriptRunner()
 
     p.configure_traits()
-#============= EOF ====================================
+# ============= EOF ====================================
