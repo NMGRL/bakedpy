@@ -60,6 +60,11 @@ class BakeoutPyScript(PyScript):
     def get_command_register(self):
         return command_register.commands.items()
 
+    def gosub(self, *args, **kw):
+        # give gosubs access to controller
+        kw['controller'] = self.controller
+        super(BakeoutPyScript, self).gosub(*args, **kw)
+
     @verbose_skip
     @command_register
     def ramp(self, temperature=0, rate=0, start=None, period=60):
