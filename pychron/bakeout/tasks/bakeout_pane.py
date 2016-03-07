@@ -19,6 +19,8 @@ from traitsui.api import View, Item, UItem, HGroup, VGroup, \
     EnumEditor, ButtonEditor
 from pyface.tasks.traits_task_pane import TraitsTaskPane
 from pyface.tasks.traits_dock_pane import TraitsDockPane
+
+
 # ============= standard library imports ========================
 # ============= local library imports  ==========================
 
@@ -57,32 +59,26 @@ class ControlsPane(TraitsDockPane):
             HGroup(Item('execute',
                         editor=ButtonEditor(label_value='execute_label'), show_label=False,
                         enabled_when='execute_ok'),
-                   Item('training_run', label='Training Run')
-            ),
-            VGroup(
-                HGroup(Item('configuration',
-                            editor=EnumEditor(name='configurations'),
-                            show_label=False),
-                       Item('save',
-                            show_label=False)
-                ),
-                show_border=True,
-                label='Configuration'
-            ),
-            VGroup('include_pressure',
-                   'include_heat',
-                   'include_temp',
+                   Item('training_run', label='Training Run')),
+            Item('comment'),
+            VGroup(HGroup(Item('configuration',
+                               editor=EnumEditor(name='configurations'),
+                               show_label=False),
+                          Item('save',
+                               show_label=False)),
+                   show_border=True,
+                   label='Configuration'),
+            VGroup(Item('include_pressure', label='Pressure'),
+                   Item('include_heat', label='% Output'),
+                   Item('include_temp', label='Temperature'),
                    label='Graphs',
                    show_border=True,
                    enabled_when='not active'),
-            VGroup(
-                Item('update_interval',
-                     label='Sample Period (s)'),
-                Item('scan_window', label='Data Window (mins)'),
-                label='Scan',
-                show_border=True,
-            )
-        )
+            VGroup(Item('update_interval',
+                        label='Sample Period (s)'),
+                   Item('scan_window', label='Data Window (mins)'),
+                   label='Scan',
+                   show_border=True))
         v = View(control_grp)
         return v
 

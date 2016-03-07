@@ -32,21 +32,21 @@ class BakeoutAdapter(PathDatabaseAdapter):
         self.debug('mmma {}'.format(self.url))
         manage_database(self.url, 'bakeoutdb', logger=self.logger)
 
-# ==============================================================================
-#    getters
-# ==============================================================================
+    # ==============================================================================
+    #    getters
+    # ==============================================================================
     def get_bakeout(self, rid):
         return self._retrieve_item(BakeoutTable, rid, key='id')
 
     def get_bakeouts(self, **kw):
         return self._get_items(BakeoutTable, globals(), **kw)
-# =============================================================================
-#   adder
-# =============================================================================
+
+    # =============================================================================
+    #   adder
+    # =============================================================================
     def add_bakeout(self, **kw):
         b = BakeoutTable(**kw)
         self._add_item(b)
-#        b = self._add_timestamped_item(BakeoutTable, commit, **kw)
         return b
 
     def add_controller(self, bakeout, **kw):
@@ -57,15 +57,11 @@ class BakeoutAdapter(PathDatabaseAdapter):
 
 if __name__ == '__main__':
     db = BakeoutAdapter(name=paths.bakeout_db,
-                            kind='sqlite')
+                        kind='sqlite')
     db.connect()
 
     dbs = BakeoutDBSelector(_db=db)
     dbs.load_recent()
     dbs.configure_traits()
-#    print db.get_bakeouts(join_table='ControllerTable',
-#                    filter_str='ControllerTable.script="---"'
-#                    )
-
 
 # ============= EOF =============================================

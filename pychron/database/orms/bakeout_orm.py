@@ -19,7 +19,7 @@
 # =============standard library imports ========================
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Float, String, \
-     ForeignKey
+    ForeignKey, BLOB
 from sqlalchemy.orm import relationship
 
 # =============local library imports  ==========================
@@ -30,6 +30,8 @@ Base = declarative_base()
 
 class BakeoutTable(Base, ResultsMixin):
     controllers = relationship('ControllerTable')
+    comment = Column(BLOB)
+
 
 class ControllerTable(Base, BaseMixin):
     bakeout_id = Column(Integer, ForeignKey('BakeoutTable.id'))
@@ -39,6 +41,6 @@ class ControllerTable(Base, BaseMixin):
     duration = Column(Float)
     script = Column(String(40))
 
+
 class BakeoutPathTable(Base, PathMixin):
     bakeout_id = Column(Integer, ForeignKey('BakeoutTable.id'))
-
