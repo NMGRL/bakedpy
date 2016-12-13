@@ -632,8 +632,7 @@ class BakeoutManager(Manager):
         return 'Stop' if self.active else 'Execute'
 
     def _get_controller_names(self):
-        c = [tr for tr in self.traits() if tr.startswith('bakeout')]
-        c.sort()
+        c = sorted([tr for tr in self.traits() if tr.startswith('bakeout')])
         return c
 
     def _get_controllers(self):

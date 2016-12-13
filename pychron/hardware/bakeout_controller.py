@@ -23,6 +23,9 @@ from traitsui.api import View, Item, spring, HGroup, Label, VGroup, Spring, \
 import time
 import os
 # ============= local library imports  ==========================
+from pychron.config_loadable import ConfigLoadable
+from pychron.hardware.furpi_controller import FurpiController
+from pychron.loggable import Loggable
 from watlow_ezzone import WatlowEZZone
 from pychron.core.helpers.timer import Timer
 from pychron.paths import paths
@@ -30,11 +33,12 @@ from pychron.pychron_constants import NULL_STR
 from pychron.pyscripts.bakeout_pyscript import BakeoutPyScript
 from pychron.core.ui.led_editor import LEDEditor, ButtonLED
 
-
 BLANK_SCRIPT = NULL_STR
+NORMAL = 'Normal'
+FURPI = 'Furpi'
 
 
-class BakeoutController(WatlowEZZone):
+class BakeoutController(ConfigLoadable):
     """
 
         bakeout controller can be operated in one of two modes.
@@ -97,6 +101,28 @@ class BakeoutController(WatlowEZZone):
     default_output = 2
 
     _start_time = 0
+
+    device_kind = NORMAL
+    _device = None
+
+    def load(self, *args, **kw):
+        config = self.get_configuration()
+        if config:
+            self.set_attribute(config, 'device_kind',
+                               'General', 'device_kind', default=NORMAL)
+
+            kw = dict(name=self.name,
+                      configuration_dir_name=self.configuration_dir_name)
+            if self.device_kind == FURPI:
+                klass = FurpiController
+            else:
+                klass = WatlowEZZone
+
+            self._device = klass(**kw)
+        return super(BakeoutController, self).load(*args, **kw)
+
+    def __getattr__(self, item):
+        return getattr(self._device, item)
 
     def initialization_hook(self):
         """
@@ -205,39 +231,6 @@ class BakeoutController(WatlowEZZone):
         self.set_closed_loop_setpoint(setpoint)
         self.setpoint = setpoint
 
-    def set_ramp_scale(self, value, **kw):
-        """
-        """
-        scalemap = {'h': 39,
-                    'm': 57}
-
-        if 'value' in scalemap:
-            self.info('setting ramp scale = {}'.format(value))
-            value = scalemap[value]
-            register = 2188
-            self.write(register, value, nregisters=2, **kw)
-
-    def set_ramp_action(self, value, **kw):
-        """
-        """
-        rampmap = {'off': 62,
-                   'startup': 88,
-                   'setpoint': 1647,
-                   'both': 13}
-
-        if value in rampmap:
-            self.info('setting ramp action = {}'.format(value))
-            value = rampmap[value]
-            register = 2186
-            self.write(register, value, nregisters=2, **kw)
-
-    def set_ramp_rate(self, value, **kw):
-        """
-        """
-        self.info('setting ramp rate = {:0.3f}'.format(value))
-        register = 2192
-        self.write(register, value, nregisters=2, **kw)
-
     def end(self, user_kill=False, script_kill=False, msg=None, error=None):
 
         if self.isActive():
@@ -263,13 +256,14 @@ class BakeoutController(WatlowEZZone):
             self.active = False
             self.state_enabled = False
 
+    # device methods
     def get_temp_and_power(self, **kw):
-        pr = super(BakeoutController, self).get_temp_and_power(**kw)
+        pr = self._device.get_temp_and_power(**kw)
         self.process_value_flag = True
         return pr
 
     def get_temperature(self, **kw):
-        t = super(BakeoutController, self).get_temperature(**kw)
+        t = self._device.get_temperature(**kw)
         self.process_value_flag = True
         return t
 

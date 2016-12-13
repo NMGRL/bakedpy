@@ -444,6 +444,39 @@ class WatlowEZZone(CoreDevice):
             except (ValueError, TypeError), e:
                 print 'watlow gettemperature', e
 
+    def set_ramp_scale(self, value, **kw):
+        """
+        """
+        scalemap = {'h': 39,
+                    'm': 57}
+
+        if 'value' in scalemap:
+            self.info('setting ramp scale = {}'.format(value))
+            value = scalemap[value]
+            register = 2188
+            self.write(register, value, nregisters=2, **kw)
+
+    def set_ramp_action(self, value, **kw):
+        """
+        """
+        rampmap = {'off': 62,
+                   'startup': 88,
+                   'setpoint': 1647,
+                   'both': 13}
+
+        if value in rampmap:
+            self.info('setting ramp action = {}'.format(value))
+            value = rampmap[value]
+            register = 2186
+            self.write(register, value, nregisters=2, **kw)
+
+    def set_ramp_rate(self, value, **kw):
+        """
+        """
+        self.info('setting ramp rate = {:0.3f}'.format(value))
+        register = 2192
+        self.write(register, value, nregisters=2, **kw)
+
     def disable(self):
         self.info('disable')
 
